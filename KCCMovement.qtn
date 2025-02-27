@@ -1,0 +1,9 @@
+component KCCMovement
+{
+    // Referencia al ScriptableObject de configuración
+    asset_ref<KCCMovementSettings> Settings;
+    
+    // Estado dinámico
+    FPVector2 Velocity;
+    FP CurrentSpeed;
+}
