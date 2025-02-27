@@ -4,7 +4,7 @@ namespace Quantum
 {
     public unsafe class KCCMovementSettings : AssetObject
     {
-        public FP CorrectionSpeed = FP._10; // Velocidad de corrección de penetración
+        public FP CorrectionSpeed = FP._10;
         public FP MaxSpeed = FP._6;
         public FP Acceleration;
         public FP Deceleration;

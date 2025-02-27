@@ -7,48 +7,48 @@ namespace Quantum
     {
         public static void Move(Frame f, EntityRef entity, FPVector2 inputDirection)
         {
-            // 1. Obtener componentes necesarios
+            // 1. Get components
             if (!f.Unsafe.TryGetPointer(entity, out KCCMovement* movement)) return;
             if (!f.Unsafe.TryGetPointer(entity, out Transform2D* transform)) return;
 
-            // 2. Cargar configuración desde el asset
+            // 2. Load configuration from asset
             var settings = f.FindAsset<KCCMovementSettings>(movement->Settings.Id);
 
-            // 3. Procesar movimiento
+            // 3. Process movement
             ProcessMovement(f, entity, movement, transform, settings, inputDirection);
         }
 
         private static void ProcessMovement(Frame f, EntityRef currentEntity, KCCMovement* movement, Transform2D* transform,
             KCCMovementSettings settings, FPVector2 inputDirection)
         {
-            // Dirección sanitizada
+            // Sanitized direction
             FPVector2 direction = inputDirection.Magnitude > FP._1 ?
                 inputDirection.Normalized :
                 inputDirection;
 
-            // Calcular aceleración
+            // Calculate acceleration
             FP acceleration = direction != FPVector2.Zero ?
                 settings.Acceleration :
                 settings.Deceleration;
 
-            // Aplicar aceleración
+            // Apply acceleration
             movement->Velocity = FPVector2.MoveTowards(
                   movement->Velocity,                // current
                   direction * settings.MaxSpeed,     // target
                   acceleration * f.DeltaTime         // maxDelta
              );
 
-            // Rotación si está habilitada
+            // Rotation if enabled
             if (settings.RotateWithMovement && direction != FPVector2.Zero)
             {
                 transform->Rotation = FPVector2.RadiansSkipNormalize(FPVector2.Up, direction);
             }
 
-            // Procesar colisiones
+            // Process collisions
             var collisionData = ProcessCollisions(f, currentEntity, settings, transform);
             ApplyCollisionCorrection(f, transform, settings, collisionData);
 
-            // Aplicar movimiento final
+            // Apply final movement
             transform->Position += movement->Velocity * f.DeltaTime;
 
             DrawDebugGizmos(settings, transform);
@@ -81,7 +81,7 @@ namespace Quantum
             for (int i = 0; i < hits.Count; i++)
             {
                 var hit = hits[i];
-                if (hit.IsTrigger || hit.Entity == currentEntity) continue; // Usa la entidad del contexto actual
+                if (hit.IsTrigger || hit.Entity == currentEntity) continue;
 
                 FPVector2 penetrationVector = transform->Position - hit.Point;
                 FP penetrationDepth = penetrationVector.Magnitude - settings.Radius;
