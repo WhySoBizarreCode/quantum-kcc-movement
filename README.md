@@ -3,7 +3,8 @@ Deterministic character movement for Photon Quantum using Kinematic Character Co
 
 A lightweight, deterministic character movement system built for Photon Quantum 3.0+. Perfect for 2D/3D games requiring precise collision response and multiplayer-ready physics.
 
-[![Quantum 3.0+](https://img.shields.io/badge/Photon_Quantum-2.1%2B-blue)](https://www.photonengine.com/quantum) 
+[![Quantum 3.0+](https://img.shields.io/badge/Photon_Quantum-3.0%2B-blue)](https://www.photonengine.com/quantum) 
+[![KCC 3.0+](https://img.shields.io/badge/KCC-3.0%2B-blue)](https://www.photonengine.com/quantum) 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Unity 2021.3+](https://img.shields.io/badge/Unity-2021.3%2B-black)](https://unity.com)
 
@@ -20,7 +21,7 @@ A lightweight, deterministic character movement system built for Photon Quantum 
 
 ## Installation ⚙️  
 ### Requires:
-2. **Requires:** [Photon Quantum 3.0+ and KCC add-on 3.0+](https://assetstore.unity.com/packages/tools/photon-quantum-178619)
+2. **Requires:** Photon Quantum 3.0+ and KCC add-on 3.0+
 
 ### Manual Setup:
 1. Copy these folders to your project:  
